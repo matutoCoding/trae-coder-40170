@@ -159,6 +159,24 @@
   font-weight: $font-weight-medium;
 }
 
+.unbindButton {
+  margin-left: $spacing-sm;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+  background: $color-expiring-bg;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.unbindButtonText {
+  font-size: $font-size-xs;
+  color: $color-expiring-text;
+  font-weight: $font-weight-medium;
+}
+
 .expiringCard {
   background: $color-bg-card;
   border-radius: $radius-md;

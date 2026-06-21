@@ -4,15 +4,12 @@ import classnames from 'classnames';
 import Taro from '@tarojs/taro';
 import { useAppStore } from '@/store/useAppStore';
 import { memberData } from '@/data/member';
-import { familyMembersData } from '@/data/family';
 import { benefitsData } from '@/data/benefits';
 import styles from './index.module.scss';
 
 const MinePage: React.FC = () => {
-  const { largeTextMode, toggleLargeText } = useAppStore();
-  const expiringBenefits = benefitsData.filter(
-    (b) => b.status === 'expiring'
-  );
+  const { largeTextMode, toggleLargeText, familyMembers, removeFamilyMember } = useAppStore();
+  const expiringBenefits = benefitsData.filter((b) => b.status === 'expiring');
 
   const handleFamilyBind = () => {
     Taro.navigateTo({ url: '/pages/family-bind/index' });
@@ -20,6 +17,20 @@ const MinePage: React.FC = () => {
 
   const handleViewExpiring = () => {
     Taro.switchTab({ url: '/pages/benefits/index' });
+  };
+
+  const handleRemoveFamily = (e: any, id: string) => {
+    e.stopPropagation();
+    Taro.showModal({
+      title: '确认解绑',
+      content: '确定要解绑该家属吗？',
+      success: (res) => {
+        if (res.confirm) {
+          removeFamilyMember(id);
+          Taro.showToast({ title: '已解绑', icon: 'success' });
+        }
+      },
+    });
   };
 
   return (
@@ -39,24 +50,29 @@ const MinePage: React.FC = () => {
 
       <View className={styles.section}>
         <Text className={styles.sectionTitle}>👨‍👩‍👧 家属管理</Text>
-        <View className={styles.familyCard}>
-          {familyMembersData.map((member) => (
-            <View className={styles.familyItem} key={member.id}>
-              <View className={styles.familyAvatar}>
-                <Text className={styles.familyAvatarText}>{member.avatar}</Text>
+        {familyMembers.length > 0 && (
+          <View className={styles.familyCard}>
+            {familyMembers.map((member) => (
+              <View className={styles.familyItem} key={member.id}>
+                <View className={styles.familyAvatar}>
+                  <Text className={styles.familyAvatarText}>{member.avatar}</Text>
+                </View>
+                <View className={styles.familyInfo}>
+                  <Text className={styles.familyName}>
+                    {member.name}（{member.relationship}）
+                  </Text>
+                  <Text className={styles.familyRelation}>
+                    绑定于 {member.boundDate}
+                  </Text>
+                </View>
+                <Text className={styles.familyPhone}>{member.phone}</Text>
+                <View className={styles.unbindButton} onClick={(e) => handleRemoveFamily(e, member.id)}>
+                  <Text className={styles.unbindButtonText}>解绑</Text>
+                </View>
               </View>
-              <View className={styles.familyInfo}>
-                <Text className={styles.familyName}>
-                  {member.name}（{member.relationship}）
-                </Text>
-                <Text className={styles.familyRelation}>
-                  绑定于 {member.boundDate}
-                </Text>
-              </View>
-              <Text className={styles.familyPhone}>{member.phone}</Text>
-            </View>
-          ))}
-        </View>
+            ))}
+          </View>
+        )}
         <View className={styles.addFamilyButton} onClick={handleFamilyBind}>
           <Text className={styles.addFamilyText}>+ 绑定家属</Text>
         </View>

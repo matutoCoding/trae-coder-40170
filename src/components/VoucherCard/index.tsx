@@ -3,6 +3,7 @@ import { View, Text } from '@tarojs/components';
 import classnames from 'classnames';
 import Taro from '@tarojs/taro';
 import type { Voucher } from '@/types/benefit';
+import { useAppStore } from '@/store/useAppStore';
 import styles from './index.module.scss';
 
 interface VoucherCardProps {
@@ -11,12 +12,16 @@ interface VoucherCardProps {
 }
 
 const VoucherCard: React.FC<VoucherCardProps> = ({ voucher, largeText }) => {
-  const handleClaim = () => {
-    if (voucher.status !== 'claimable') return;
-    Taro.showToast({
-      title: '领取成功',
-      icon: 'success',
-    });
+  const { claimVoucher, isVoucherClaimed } = useAppStore();
+  const claimed = isVoucherClaimed(voucher.id);
+  const isClaimed = voucher.status === 'claimed' || claimed;
+  const isExpired = voucher.status === 'expired';
+
+  const handleClaim = (e: any) => {
+    e.stopPropagation();
+    if (isClaimed || isExpired) return;
+    claimVoucher(voucher.id);
+    Taro.showToast({ title: '领取成功', icon: 'success' });
     console.info('[VoucherCard] 领取优惠券:', voucher.id);
   };
 
@@ -25,8 +30,8 @@ const VoucherCard: React.FC<VoucherCardProps> = ({ voucher, largeText }) => {
       className={classnames(
         styles.card,
         largeText && styles.largeText,
-        voucher.status === 'claimed' && styles.claimed,
-        voucher.status === 'expired' && styles.expired
+        isClaimed && styles.claimed,
+        isExpired && styles.expired
       )}
     >
       <View className={styles.leftSection}>
@@ -38,12 +43,12 @@ const VoucherCard: React.FC<VoucherCardProps> = ({ voucher, largeText }) => {
         <Text className={styles.description}>{voucher.description}</Text>
         <Text className={styles.expiry}>有效期至 {voucher.expiryDate}</Text>
       </View>
-      {voucher.status === 'claimable' && (
+      {!isClaimed && !isExpired && (
         <View className={styles.claimButton} onClick={handleClaim}>
           <Text className={styles.claimButtonText}>领取</Text>
         </View>
       )}
-      {voucher.status === 'claimed' && (
+      {isClaimed && (
         <View className={styles.claimedTag}>
           <Text className={styles.claimedTagText}>已领</Text>
         </View>

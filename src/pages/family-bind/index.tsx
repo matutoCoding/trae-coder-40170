@@ -3,12 +3,20 @@ import { View, Text, Input } from '@tarojs/components';
 import classnames from 'classnames';
 import Taro from '@tarojs/taro';
 import { useAppStore } from '@/store/useAppStore';
+import type { FamilyMember } from '@/types/benefit';
 import styles from './index.module.scss';
 
 const relations = ['儿子', '女儿', '配偶', '其他'];
 
+const relationAvatarMap: Record<string, string> = {
+  '儿子': '👨',
+  '女儿': '👩',
+  '配偶': '💑',
+  '其他': '🧑',
+};
+
 const FamilyBindPage: React.FC = () => {
-  const { largeTextMode } = useAppStore();
+  const { largeTextMode, addFamilyMember } = useAppStore();
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
   const [relation, setRelation] = useState('');
@@ -27,10 +35,26 @@ const FamilyBindPage: React.FC = () => {
       return;
     }
     if (!/^1\d{10}$/.test(phone.trim())) {
-      Taro.showToast({ title: '请输入正确的手机号', icon: 'none' });
+      Taro.showToast({ title: '手机号格式不正确，请输入11位手机号', icon: 'none' });
       return;
     }
-    console.info('[FamilyBind] 绑定家属:', { name, phone, relation });
+
+    const newMember: FamilyMember = {
+      id: `fm_${Date.now()}`,
+      name: name.trim(),
+      relationship: relation,
+      phone: phone.trim(),
+      avatar: relationAvatarMap[relation] || '🧑',
+      boundDate: new Date().toISOString().slice(0, 10),
+    };
+
+    const success = addFamilyMember(newMember);
+    if (!success) {
+      Taro.showToast({ title: '该手机号已绑定，请勿重复绑定', icon: 'none' });
+      return;
+    }
+
+    console.info('[FamilyBind] 绑定家属成功:', newMember);
     Taro.showToast({ title: '绑定成功', icon: 'success' });
     setTimeout(() => {
       Taro.navigateBack();

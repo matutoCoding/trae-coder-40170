@@ -21,24 +21,40 @@ const statusMap: Record<string, string> = {
 };
 
 const BenefitDetailPage: React.FC = () => {
-  const { largeTextMode } = useAppStore();
+  const { largeTextMode, addChecklistItem, isInChecklist } = useAppStore();
 
   const params = Taro.getCurrentInstance().router?.params;
   const benefitId = params?.id || '1';
   const benefit = benefitsData.find((b) => b.id === benefitId) || benefitsData[0];
 
-  const handleUseBenefit = () => {
-    if (benefit.status === 'available' || benefit.status === 'expiring') {
-      Taro.showToast({ title: '已添加到到店清单', icon: 'success' });
-      Taro.switchTab({ url: '/pages/visit/index' });
-    } else {
-      Taro.showToast({ title: '该权益当前不可用', icon: 'none' });
-    }
+  const inList = isInChecklist('benefit', benefit.id);
+
+  const handleAddToChecklist = () => {
+    if (inList) return;
+    addChecklistItem({
+      name: `领取：${benefit.name}`,
+      category: categoryMap[benefit.category],
+      isCompleted: false,
+      source: 'benefit',
+      sourceId: benefit.id,
+    });
+    Taro.showToast({ title: '已加入到店清单', icon: 'success' });
   };
 
   const handleShareToFamily = () => {
-    Taro.showToast({ title: '已分享给家属', icon: 'success' });
-    console.info('[BenefitDetail] 分享权益:', benefit.id);
+    const familyMembers = useAppStore.getState().familyMembers;
+    if (familyMembers.length === 0) {
+      Taro.showToast({ title: '请先绑定家属', icon: 'none' });
+      Taro.navigateTo({ url: '/pages/family-bind/index' });
+      return;
+    }
+    Taro.setClipboardData({
+      data: `【康享权益】${benefit.name}\n${benefit.briefDescription}\n\n✅ 能做什么：${benefit.canDo}\n❌ 不能做什么：${benefit.cannotDo}\n💬 到店怎么说：${benefit.howToSay}`,
+      success: () => {
+        Taro.showToast({ title: '权益信息已复制，可发给家属', icon: 'success' });
+        console.info('[BenefitDetail] 分享权益给家属:', benefit.id);
+      },
+    });
   };
 
   return (
@@ -97,11 +113,19 @@ const BenefitDetailPage: React.FC = () => {
           </Text>
         </View>
         <View
-          className={classnames(styles.actionButton, styles.primaryButton)}
-          onClick={handleUseBenefit}
+          className={classnames(
+            styles.actionButton,
+            inList ? styles.addedButton : styles.primaryButton
+          )}
+          onClick={handleAddToChecklist}
         >
-          <Text className={classnames(styles.actionButtonText, styles.primaryButtonText)}>
-            去使用
+          <Text
+            className={classnames(
+              styles.actionButtonText,
+              inList ? styles.addedButtonText : styles.primaryButtonText
+            )}
+          >
+            {inList ? '已加入清单' : '加入清单'}
           </Text>
         </View>
       </View>

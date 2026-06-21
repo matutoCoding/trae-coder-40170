@@ -324,3 +324,61 @@
   color: $color-primary;
   font-weight: $font-weight-medium;
 }
+
+.addToChecklistBtn {
+  padding: 6rpx 20rpx;
+  border-radius: $radius-round;
+  background: $color-primary;
+  margin-left: $spacing-sm;
+  flex-shrink: 0;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.addToChecklistBtnText {
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.addedBtn {
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+}
+
+.addedBtnText {
+  color: $color-text-tertiary;
+}
+
+.recAddBtn {
+  margin-top: $spacing-xs;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+  background: $color-primary;
+  align-self: flex-start;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.recAddBtnText {
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.recAddedBtn {
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+}
+
+.recAddedBtnText {
+  color: $color-text-tertiary;
+}

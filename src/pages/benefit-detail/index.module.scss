@@ -194,6 +194,11 @@
   border: 2rpx solid $color-border;
 }
 
+.addedButton {
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+}
+
 .actionButtonText {
   font-size: $font-size-lg;
   font-weight: $font-weight-medium;
@@ -205,4 +210,8 @@
 
 .secondaryButtonText {
   color: $color-text-secondary;
+}
+
+.addedButtonText {
+  color: $color-text-tertiary;
 }

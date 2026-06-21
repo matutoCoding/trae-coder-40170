@@ -7,6 +7,7 @@ export default defineAppConfig({
     'pages/benefit-detail/index',
     'pages/store-list/index',
     'pages/family-bind/index',
+    'pages/recommendations/index',
   ],
   window: {
     backgroundTextStyle: 'light',

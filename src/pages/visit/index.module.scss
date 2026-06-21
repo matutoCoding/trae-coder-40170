@@ -30,6 +30,9 @@
     .qrCodeDesc {
       font-size: 28rpx;
     }
+    .verifiedName {
+      font-size: 30rpx;
+    }
   }
 }
 
@@ -65,6 +68,62 @@
   font-size: $font-size-sm;
   color: $color-text-white;
   font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.clearButton {
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-round;
+  padding: $spacing-xs $spacing-md;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.clearButtonText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.seeAllText {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.emptyState {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.emptyIcon {
+  font-size: 64rpx;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+  margin-bottom: $spacing-xs;
+}
+
+.emptyHint {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+  line-height: $line-height-loose;
 }
 
 .checklistCard {
@@ -96,6 +155,7 @@
   justify-content: center;
   margin-right: $spacing-md;
   transition: all $transition-base;
+  flex-shrink: 0;
 }
 
 .checkBoxChecked {
@@ -105,10 +165,12 @@
 
 .checkBoxIcon {
   font-size: 28rpx;
+  color: $color-text-white;
 }
 
 .checkItemInfo {
   flex: 1;
+  min-width: 0;
 }
 
 .checkItemName {
@@ -118,20 +180,62 @@
   margin-bottom: 4rpx;
 }
 
+.checkItemMeta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  flex-wrap: wrap;
+}
+
+.sourceTag {
+  background: $color-medical-tag-bg;
+  padding: 2rpx 10rpx;
+  border-radius: $radius-round;
+}
+
+.sourceTagText {
+  font-size: $font-size-xs;
+  color: $color-medical-tag-text;
+}
+
 .checkItemCategory {
   font-size: $font-size-xs;
   color: $color-text-tertiary;
 }
 
+.completedTime {
+  font-size: $font-size-xs;
+  color: $color-voucher-text;
+}
+
+.verifyButton {
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-round;
+  background: $color-voucher-bg;
+  border: 1rpx solid $color-voucher-text;
+  margin-left: $spacing-sm;
+  flex-shrink: 0;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.verifyButtonText {
+  font-size: $font-size-xs;
+  color: $color-voucher-text;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
 .generateButton {
-  width: 100%;
   height: $button-height-lg;
   background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
   border-radius: $radius-button;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: $spacing-md;
   @include button-reset;
 
   &:active {
@@ -192,6 +296,46 @@
   font-size: $font-size-sm;
   color: $color-text-tertiary;
   text-align: center;
+}
+
+.verifiedCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-sm;
+}
+
+.verifiedItem {
+  display: flex;
+  align-items: center;
+  padding: $spacing-sm 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.verifiedIcon {
+  margin-right: $spacing-md;
+  font-size: 32rpx;
+}
+
+.verifiedInfo {
+  flex: 1;
+}
+
+.verifiedName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.verifiedMeta {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
 }
 
 .storeCard {

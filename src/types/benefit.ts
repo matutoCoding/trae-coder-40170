@@ -54,7 +54,7 @@ export interface Recommendation {
   name: string;
   reason: string;
   benefit: string;
-  category: string;
+  category: '慢病药补货' | '家用器械' | '日常备药';
   icon: string;
 }
 
@@ -72,6 +72,10 @@ export interface ChecklistItem {
   name: string;
   category: string;
   isCompleted: boolean;
+  source: 'benefit' | 'recommendation' | 'reminder' | 'manual';
+  sourceId?: string;
+  addedAt: string;
+  completedAt?: string;
 }
 
 export interface PaymentTip {
@@ -79,4 +83,12 @@ export interface PaymentTip {
   title: string;
   description: string;
   type: 'warning' | 'info' | 'success';
+}
+
+export interface VerifiedBenefit {
+  benefitId: string;
+  benefitName: string;
+  benefitIcon: string;
+  verifiedAt: string;
+  storeName: string;
 }

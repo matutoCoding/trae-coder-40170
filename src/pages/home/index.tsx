@@ -17,9 +17,8 @@ const tipIconMap: Record<string, string> = {
 };
 
 const HomePage: React.FC = () => {
-  const { largeTextMode, toggleLargeText } = useAppStore();
+  const { largeTextMode, toggleLargeText, addChecklistItem, isInChecklist } = useAppStore();
   const expiringBenefits = benefitsData.filter((b) => b.status === 'expiring');
-  const claimableVouchers = vouchersData.filter((v) => v.status === 'claimable');
 
   const handleNavigateBenefits = () => {
     Taro.switchTab({ url: '/pages/benefits/index' });
@@ -30,11 +29,35 @@ const HomePage: React.FC = () => {
   };
 
   const handleNavigateRecommendations = () => {
-    Taro.switchTab({ url: '/pages/benefits/index' });
+    Taro.navigateTo({ url: '/pages/recommendations/index' });
   };
 
   const handleNavigateExpiring = () => {
     Taro.switchTab({ url: '/pages/benefits/index' });
+  };
+
+  const handleAddReminderToChecklist = (reminder: typeof medicationReminders[0]) => {
+    if (isInChecklist('reminder', reminder.id)) return;
+    addChecklistItem({
+      name: `补货：${reminder.name}`,
+      category: '慢病药补货',
+      isCompleted: false,
+      source: 'reminder',
+      sourceId: reminder.id,
+    });
+    Taro.showToast({ title: '已加入到店清单', icon: 'success' });
+  };
+
+  const handleAddRecToChecklist = (rec: typeof recommendationsData[0]) => {
+    if (isInChecklist('recommendation', rec.id)) return;
+    addChecklistItem({
+      name: rec.name,
+      category: rec.category,
+      isCompleted: false,
+      source: 'recommendation',
+      sourceId: rec.id,
+    });
+    Taro.showToast({ title: '已加入到店清单', icon: 'success' });
   };
 
   return (
@@ -103,43 +126,80 @@ const HomePage: React.FC = () => {
         <View className={styles.sectionHeader}>
           <Text className={styles.sectionTitle}>💊 复购提醒</Text>
         </View>
-        {medicationReminders.map((reminder) => (
-          <View className={styles.reminderCard} key={reminder.id}>
-            <Text className={styles.reminderIcon}>
-              {reminder.isUrgent ? '🔴' : '💊'}
-            </Text>
-            <View className={styles.reminderInfo}>
-              <Text className={styles.reminderName}>{reminder.name}</Text>
-              <Text className={styles.reminderDosage}>{reminder.dosage}</Text>
-            </View>
-            <View className={styles.reminderRight}>
-              <Text className={styles.reminderDate}>
-                建议复购 {reminder.nextPurchaseDate}
+        {medicationReminders.map((reminder) => {
+          const inList = isInChecklist('reminder', reminder.id);
+          return (
+            <View className={styles.reminderCard} key={reminder.id}>
+              <Text className={styles.reminderIcon}>
+                {reminder.isUrgent ? '🔴' : '💊'}
               </Text>
-              {reminder.isUrgent && (
-                <View className={styles.urgentTag}>
-                  <Text className={styles.urgentTagText}>需尽快</Text>
-                </View>
-              )}
+              <View className={styles.reminderInfo}>
+                <Text className={styles.reminderName}>{reminder.name}</Text>
+                <Text className={styles.reminderDosage}>{reminder.dosage}</Text>
+              </View>
+              <View className={styles.reminderRight}>
+                <Text className={styles.reminderDate}>
+                  建议复购 {reminder.nextPurchaseDate}
+                </Text>
+                {reminder.isUrgent && (
+                  <View className={styles.urgentTag}>
+                    <Text className={styles.urgentTagText}>需尽快</Text>
+                  </View>
+                )}
+              </View>
+              <View
+                className={classnames(
+                  styles.addToChecklistBtn,
+                  inList && styles.addedBtn
+                )}
+                onClick={() => handleAddReminderToChecklist(reminder)}
+              >
+                <Text className={classnames(
+                  styles.addToChecklistBtnText,
+                  inList && styles.addedBtnText
+                )}>
+                  {inList ? '已加' : '+清单'}
+                </Text>
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
       </View>
 
       <View className={styles.section}>
         <View className={styles.sectionHeader}>
           <Text className={styles.sectionTitle}>🛒 今天推荐</Text>
+          <Text className={styles.sectionMore} onClick={handleNavigateRecommendations}>
+            查看全部 ›
+          </Text>
         </View>
         <ScrollView scrollX className={styles.recScroll}>
           <View className={styles.recScrollContent}>
-            {recommendationsData.map((rec) => (
-              <View className={styles.recCard} key={rec.id}>
-                <Text className={styles.recIcon}>{rec.icon}</Text>
-                <Text className={styles.recName}>{rec.name}</Text>
-                <Text className={styles.recReason}>{rec.reason}</Text>
-                <Text className={styles.recBenefit}>{rec.benefit}</Text>
-              </View>
-            ))}
+            {recommendationsData.slice(0, 5).map((rec) => {
+              const inList = isInChecklist('recommendation', rec.id);
+              return (
+                <View className={styles.recCard} key={rec.id}>
+                  <Text className={styles.recIcon}>{rec.icon}</Text>
+                  <Text className={styles.recName}>{rec.name}</Text>
+                  <Text className={styles.recReason}>{rec.reason}</Text>
+                  <Text className={styles.recBenefit}>{rec.benefit}</Text>
+                  <View
+                    className={classnames(
+                      styles.recAddBtn,
+                      inList && styles.recAddedBtn
+                    )}
+                    onClick={() => handleAddRecToChecklist(rec)}
+                  >
+                    <Text className={classnames(
+                      styles.recAddBtnText,
+                      inList && styles.recAddedBtnText
+                    )}>
+                      {inList ? '已加' : '+清单'}
+                    </Text>
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </ScrollView>
       </View>

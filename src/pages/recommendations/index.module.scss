@@ -1,0 +1,133 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: 0 $page-padding;
+  padding-bottom: 180rpx;
+
+  &.largeText {
+    .categoryTitle {
+      font-size: 36rpx;
+    }
+    .recName {
+      font-size: 34rpx;
+    }
+    .recReason {
+      font-size: 28rpx;
+    }
+    .addButtonText {
+      font-size: 26rpx;
+    }
+  }
+}
+
+.categorySection {
+  margin-bottom: $spacing-lg;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.categoryIcon {
+  font-size: 36rpx;
+  margin-right: $spacing-sm;
+}
+
+.categoryTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.recCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  display: flex;
+  align-items: center;
+}
+
+.recIconWrap {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: $radius-md;
+  background: $color-bg-page;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: $spacing-md;
+  flex-shrink: 0;
+}
+
+.recIcon {
+  font-size: 40rpx;
+}
+
+.recInfo {
+  flex: 1;
+}
+
+.recName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.recReason {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  @include text-ellipsis-multi(2);
+  margin-bottom: 4rpx;
+}
+
+.recBenefit {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.addButton {
+  padding: $spacing-xs $spacing-lg;
+  border-radius: $radius-round;
+  background: $color-primary;
+  margin-left: $spacing-sm;
+  flex-shrink: 0;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.addButtonText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.addedButton {
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+}
+
+.addedButtonText {
+  color: $color-text-tertiary;
+}
+
+.emptyTip {
+  text-align: center;
+  padding: $spacing-xl 0;
+}
+
+.emptyTipText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}
