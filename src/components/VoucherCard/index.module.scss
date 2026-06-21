@@ -1,0 +1,110 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  width: 280rpx;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  position: relative;
+  margin-right: $spacing-md;
+  flex-shrink: 0;
+
+  &.largeText {
+    .name {
+      font-size: 30rpx;
+    }
+    .value {
+      font-size: 40rpx;
+    }
+    .description {
+      font-size: 26rpx;
+    }
+  }
+
+  &.claimed {
+    opacity: 0.7;
+  }
+
+  &.expired {
+    opacity: 0.5;
+  }
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-xs;
+  background: $color-voucher-bg;
+  padding: $spacing-md $spacing-sm;
+}
+
+.icon {
+  font-size: 36rpx;
+}
+
+.value {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-voucher-text;
+}
+
+.rightSection {
+  padding: $spacing-sm $spacing-md;
+}
+
+.name {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.description {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+  @include text-ellipsis-multi(1);
+}
+
+.expiry {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.claimButton {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  background: $color-primary;
+  border-radius: $radius-round;
+  padding: 4rpx 20rpx;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.claimButtonText {
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.claimedTag {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  background: $color-divider;
+  border-radius: $radius-round;
+  padding: 4rpx 20rpx;
+}
+
+.claimedTagText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}

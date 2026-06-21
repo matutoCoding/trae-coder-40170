@@ -1,0 +1,257 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: 0 $page-padding;
+  padding-bottom: 180rpx;
+
+  &.largeText {
+    .sectionTitle {
+      font-size: 38rpx;
+    }
+    .checkItemName {
+      font-size: 34rpx;
+    }
+    .checkItemCategory {
+      font-size: 26rpx;
+    }
+    .storeName {
+      font-size: 34rpx;
+    }
+    .storeAddress {
+      font-size: 28rpx;
+    }
+    .storeDistance {
+      font-size: 28rpx;
+    }
+    .qrCodeText {
+      font-size: 36rpx;
+    }
+    .qrCodeDesc {
+      font-size: 28rpx;
+    }
+  }
+}
+
+.section {
+  margin-bottom: $spacing-lg;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.qrCodeButton {
+  background: $color-primary;
+  border-radius: $radius-round;
+  padding: $spacing-xs $spacing-lg;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.qrCodeButtonText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.checklistCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.checkBox {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: $radius-sm;
+  border: 3rpx solid $color-border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: $spacing-md;
+  transition: all $transition-base;
+}
+
+.checkBoxChecked {
+  background: $color-primary;
+  border-color: $color-primary;
+}
+
+.checkBoxIcon {
+  font-size: 28rpx;
+}
+
+.checkItemInfo {
+  flex: 1;
+}
+
+.checkItemName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.checkItemCategory {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.generateButton {
+  width: 100%;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: $spacing-md;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.generateButtonText {
+  font-size: $font-size-lg;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.qrCodeSection {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.qrCodePlaceholder {
+  width: 320rpx;
+  height: 320rpx;
+  background: $color-bg-page;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: $spacing-md;
+  border: 4rpx dashed $color-border;
+}
+
+.qrCodeInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrCodeIcon {
+  font-size: 80rpx;
+  margin-bottom: $spacing-sm;
+}
+
+.qrCodeText {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.qrCodeDesc {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+}
+
+.storeCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  display: flex;
+  align-items: center;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.storeInfo {
+  flex: 1;
+}
+
+.storeName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.storeAddress {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: 4rpx;
+}
+
+.storeDistance {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.storeArrow {
+  font-size: $font-size-lg;
+  color: $color-text-tertiary;
+  margin-left: $spacing-sm;
+}
+
+.serviceTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+  margin-top: $spacing-xs;
+}
+
+.serviceTag {
+  background: $color-medical-tag-bg;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-round;
+}
+
+.serviceTagText {
+  font-size: $font-size-xs;
+  color: $color-medical-tag-text;
+}

@@ -1,0 +1,326 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: 0 $page-padding;
+  padding-bottom: 180rpx;
+
+  &.largeText {
+    .sectionTitle {
+      font-size: 38rpx;
+    }
+    .entryLabel {
+      font-size: 30rpx;
+    }
+    .reminderName {
+      font-size: 34rpx;
+    }
+    .reminderDosage {
+      font-size: 28rpx;
+    }
+    .tipTitle {
+      font-size: 32rpx;
+    }
+    .tipDesc {
+      font-size: 30rpx;
+    }
+    .bannerText {
+      font-size: 30rpx;
+    }
+    .recName {
+      font-size: 30rpx;
+    }
+    .recReason {
+      font-size: 26rpx;
+    }
+  }
+}
+
+.header {
+  padding-top: $spacing-md;
+  padding-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.largeTextButton {
+  background: $color-bg-card;
+  border-radius: $radius-round;
+  padding: $spacing-xs $spacing-md;
+  box-shadow: $shadow-card;
+  @include button-reset;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.largeTextButtonText {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.banner {
+  background: $color-expiring-bg;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bannerLeft {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.bannerIcon {
+  font-size: 36rpx;
+  margin-right: $spacing-sm;
+}
+
+.bannerText {
+  font-size: $font-size-md;
+  color: $color-expiring-text;
+  font-weight: $font-weight-medium;
+  flex: 1;
+}
+
+.bannerArrow {
+  font-size: $font-size-sm;
+  color: $color-expiring-text;
+}
+
+.entrySection {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+.entryCard {
+  flex: 1;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg $spacing-sm;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.entryIcon {
+  font-size: 56rpx;
+  margin-bottom: $spacing-sm;
+}
+
+.entryLabel {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  text-align: center;
+}
+
+.entryDesc {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: $spacing-lg;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.sectionMore {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.voucherScroll {
+  width: 100%;
+  @include scroll-x-container;
+  margin-bottom: $spacing-md;
+}
+
+.voucherScrollContent {
+  display: inline-flex;
+  padding-right: $spacing-md;
+}
+
+.reminderCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  display: flex;
+  align-items: center;
+}
+
+.reminderIcon {
+  font-size: 40rpx;
+  margin-right: $spacing-md;
+}
+
+.reminderInfo {
+  flex: 1;
+}
+
+.reminderName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.reminderDosage {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.reminderRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.reminderDate {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 4rpx;
+}
+
+.urgentTag {
+  background: $color-expiring-bg;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-round;
+}
+
+.urgentTagText {
+  font-size: $font-size-xs;
+  color: $color-expiring-text;
+  font-weight: $font-weight-medium;
+}
+
+.tipCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-sm;
+  box-shadow: $shadow-card;
+  display: flex;
+  align-items: flex-start;
+}
+
+.tipIconWrap {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: $radius-round;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: $spacing-md;
+  flex-shrink: 0;
+
+  &.info {
+    background: $color-tip-bg;
+  }
+  &.warning {
+    background: $color-benefit-tag-bg;
+  }
+  &.success {
+    background: $color-voucher-bg;
+  }
+}
+
+.tipIcon {
+  font-size: 28rpx;
+}
+
+.tipContent {
+  flex: 1;
+}
+
+.tipTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.tipDesc {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+}
+
+.recScroll {
+  width: 100%;
+  @include scroll-x-container;
+  margin-bottom: $spacing-md;
+}
+
+.recScrollContent {
+  display: inline-flex;
+  padding-right: $spacing-md;
+}
+
+.recCard {
+  @include scroll-x-item(260rpx);
+  display: inline-flex;
+  flex-direction: column;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  margin-right: $spacing-md;
+}
+
+.recIcon {
+  font-size: 48rpx;
+  margin-bottom: $spacing-xs;
+}
+
+.recName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.recReason {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  @include text-ellipsis-multi(1);
+  margin-bottom: 8rpx;
+}
+
+.recBenefit {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}

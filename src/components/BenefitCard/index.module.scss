@@ -1,0 +1,208 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  box-shadow: $shadow-card;
+
+  &.largeText {
+    .cardName {
+      font-size: 38rpx;
+    }
+    .cardDesc {
+      font-size: 32rpx;
+    }
+    .detailContent {
+      font-size: 30rpx;
+    }
+  }
+}
+
+.cardHeader {
+  margin-bottom: $spacing-sm;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+}
+
+.cardIcon {
+  font-size: 44rpx;
+  margin-right: $spacing-sm;
+}
+
+.cardName {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  flex: 1;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.categoryTag {
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+  display: inline-flex;
+  align-items: center;
+
+  &.tag_health {
+    background: $color-medical-tag-bg;
+  }
+  &.tag_medication {
+    background: $color-benefit-tag-bg;
+  }
+  &.tag_equipment {
+    background: $color-voucher-bg;
+  }
+  &.tag_consultation {
+    background: $color-tip-bg;
+  }
+}
+
+.categoryTagText {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+
+  .tag_health & {
+    color: $color-medical-tag-text;
+  }
+  .tag_medication & {
+    color: $color-benefit-tag-text;
+  }
+  .tag_equipment & {
+    color: $color-voucher-text;
+  }
+  .tag_consultation & {
+    color: $color-tip-text;
+  }
+}
+
+.statusTag {
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+  display: inline-flex;
+  align-items: center;
+
+  &.status_available {
+    background: $color-voucher-bg;
+  }
+  &.status_used {
+    background: $color-bg-hover;
+  }
+  &.status_expired {
+    background: $color-divider;
+  }
+  &.status_expiring {
+    background: $color-expiring-bg;
+  }
+}
+
+.statusTagText {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+
+  .status_available & {
+    color: $color-voucher-text;
+  }
+  .status_used & {
+    color: $color-text-tertiary;
+  }
+  .status_expired & {
+    color: $color-text-disabled;
+  }
+  .status_expiring & {
+    color: $color-expiring-text;
+  }
+}
+
+.cardDesc {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  margin-bottom: $spacing-sm;
+}
+
+.expiryRow {
+  margin-bottom: $spacing-sm;
+}
+
+.expiryText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+.expandButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm 0;
+  border-top: 1rpx solid $color-divider;
+}
+
+.expandButtonText {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.detailSection {
+  margin-top: $spacing-md;
+  padding-top: $spacing-md;
+  border-top: 1rpx solid $color-divider;
+}
+
+.detailBlock {
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.detailLabel {
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  margin-bottom: $spacing-xs;
+  display: inline-flex;
+
+  &.canDo {
+    background: $color-can-do-bg;
+  }
+  &.cannotDo {
+    background: $color-cannot-do-bg;
+  }
+  &.howToSay {
+    background: $color-tip-bg;
+  }
+}
+
+.detailLabelText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+
+  .canDo & {
+    color: $color-can-do-text;
+  }
+  .cannotDo & {
+    color: $color-cannot-do-text;
+  }
+  .howToSay & {
+    color: $color-tip-text;
+  }
+}
+
+.detailContent {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  line-height: $line-height-loose;
+  padding-left: $spacing-sm;
+}

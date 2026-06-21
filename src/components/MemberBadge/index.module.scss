@@ -1,0 +1,71 @@
+@use '@/styles/variables.scss' as *;
+
+.badge {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+
+  &.largeText {
+    .name {
+      font-size: 40rpx;
+    }
+    .levelText {
+      font-size: 26rpx;
+    }
+    .points {
+      font-size: 26rpx;
+    }
+  }
+}
+
+.avatar {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: $radius-round;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: $spacing-md;
+}
+
+.avatarText {
+  font-size: 44rpx;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: 8rpx;
+}
+
+.levelRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.levelTag {
+  background: rgba(255, 255, 255, 0.25);
+  padding: 4rpx 16rpx;
+  border-radius: $radius-round;
+}
+
+.levelText {
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.points {
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.85);
+}
